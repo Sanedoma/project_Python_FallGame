@@ -42,9 +42,11 @@ class CometFallEvent:
         # Si le joueur reste immobile pendant trop longtemps
         if not self.game.player.mobil and self.game.player.imobilTime >= 5:
             print("Anti-camp activé : le joueur est immobile depuis trop longtemps.")
-            for i in range(1, 100):
+            self.game.player.velocity = 0
+            for i in range(1, 10):
                 comet = Comet(self)
                 comet.rect.x = self.game.player.rect.x
+                comet.velocity = 1000
                 self.all_comets.add(comet)
                 # Réinitialisation des compteurs
                 self.game.player.imobilTime = 0
