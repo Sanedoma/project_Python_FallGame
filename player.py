@@ -11,13 +11,16 @@ class Player(animation.AnimateSprite):
         self.health = 10000
         self.max_health = 10000
         self.attack = 20
+        self.fixAttack = 20
         self.all_projectiles = pygame.sprite.Group()
+        self.fixVelocity = 2
         self.velocity = 2
         self.rect = self.image.get_rect()
         self.rect.x = 400
         self.rect.y = 500
         self.mobil = False
         self.imobilTime = 0
+        self.kaioken = False
     
     def heal(self):
         if self.health + 800 < self.max_health:
@@ -56,3 +59,14 @@ class Player(animation.AnimateSprite):
         
     def update_animation(self):
         self.animate()
+        
+    def kaioken_mode(self):
+        if self.kaioken == False:
+            self.kaioken = True
+            self.velocity += 50
+            self.attack *= 30
+    def normal_mode(self):
+        if self.kaioken == True:
+            self.kaioken = False
+            self.velocity = self.fixVelocity
+            self.attack = self.fixAttack

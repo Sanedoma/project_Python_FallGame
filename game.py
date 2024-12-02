@@ -125,7 +125,13 @@ class Game:
             self.player.move_rigth()
         elif self.perssed.get(pygame.K_LEFT) and self.player.rect.x > 0:
             self.player.move_left()
-        
+        elif self.perssed.get(pygame.K_k):
+            if self.score >= 200:
+                self.player.kaioken_mode()
+                self.score -= 50/60
+            else:
+                self.player.normal_mode
+                
     def check_collision(self, sprite, group):
         return pygame.sprite.spritecollide(sprite, group, False, pygame.sprite.collide_mask)
     def spawn_monster(self, monster_class_name):
